@@ -4,6 +4,7 @@ import express from 'express'
 import { buildSchema } from 'type-graphql'
 import { UsersResolver } from './modules/users/graphql/resolvers/UsersResolver'
 import { connect } from './config/database'
+import { PetsResolver } from './modules/pets/graphql/resolvers/PetsResolver'
 
 const app = express()
 
@@ -11,7 +12,7 @@ async function init () {
   await connect()
 
   const schema = await buildSchema({
-    resolvers: [UsersResolver]
+    resolvers: [UsersResolver, PetsResolver]
   })
 
   const apolloServer = new ApolloServer({
